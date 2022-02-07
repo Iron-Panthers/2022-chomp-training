@@ -42,7 +42,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    drive();
+    runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick));
   }
 
   /**
@@ -51,11 +51,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-
-  private void drive () {
-    new MotorCommand(runMotor, happyStick);
-  }
-
   private void configureButtonBindings() {
 
     testHappiness.whileHeld(new BrakeCommand(runMotor, happyStick));

@@ -11,7 +11,7 @@ package frc.robot;
  * globally (i.e. public static). Do not put anything functional in this class.
  *
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
+ * constants are needed, to reduce verbosity.+
  */
 public final class Constants {
 
@@ -22,25 +22,19 @@ public final class Constants {
 
 
     public static class Motor {
-        public static final int kLeft1Id = 1;
-        public static final int kLeft2Id = 2;
-        public static final int kRight1Id = 3;
-        public static final int kRight2Id = 4;
+        public static final int kLeft1Id = 2;
+        public static final int kLeft2Id = 22;
+        public static final int kRight1Id = 1;
+        public static final int kRight2Id = 21;
 
     }
 
     public static class RobotContainer {
 
-        public static final int Ajoystick = 1;
+        public static final int Ajoystick = 0;
         public static final int MOTOR_BUTTON = 3;
         public static final int BRAKE_BUTTON = 1;
         
     }
-
-    
-      
-    
-
-
 
 }

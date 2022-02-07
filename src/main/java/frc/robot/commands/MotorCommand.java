@@ -18,6 +18,8 @@ public class MotorCommand extends CommandBase {
 
   public MotorCommand(MotorSubsystem testMotor, Joystick happyStick) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.testMotor = testMotor;
+    this.happyStick = happyStick;
     addRequirements(testMotor);
   }
 
@@ -29,8 +31,8 @@ public class MotorCommand extends CommandBase {
   @Override
   public void execute() {
     testMotor.setDrive(-(happyStick.getY()));
-    testMotor.turnRight(happyStick.getX());
-    testMotor.turnLeft(happyStick.getX());
+    //testMotor.turnRight(happyStick.getX());
+    //testMotor.turnLeft(happyStick.getX());
   }
 
   // Called once the command ends or is interrupted.
