@@ -27,8 +27,8 @@ public class MotorSubsystem extends SubsystemBase {
   }
 
     public void setDrive(double y) {
-      left1.set(TalonFXControlMode.PercentOutput, y);
-      left2.set(TalonFXControlMode.PercentOutput, y);
+      left1.set(TalonFXControlMode.PercentOutput, -y);
+      left2.set(TalonFXControlMode.PercentOutput, -y);
       right1.set(TalonFXControlMode.PercentOutput, y);
       right2.set(TalonFXControlMode.PercentOutput, y);
     }
