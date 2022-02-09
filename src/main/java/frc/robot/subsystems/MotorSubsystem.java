@@ -7,6 +7,9 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
@@ -17,20 +20,45 @@ public class MotorSubsystem extends SubsystemBase {
   private final TalonFX left2 = new TalonFX(Constants.Motor.kLeft2Id);
   private final TalonFX right1 = new TalonFX(Constants.Motor.kRight1Id);
   private final TalonFX right2 = new TalonFX(Constants.Motor.kRight2Id);
+  private final Solenoid shifter = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Motor.pcmID);
 
+
+
+  
   /** Creates a new Motor. */
   public MotorSubsystem() {
 
     //follows
     left2.follow(left1);
     right2.follow(right1);
+    shiftLow();
   }
 
     public void setDrive(double y) {
-      left1.set(TalonFXControlMode.PercentOutput, -y);
-      left2.set(TalonFXControlMode.PercentOutput, -y);
-      right1.set(TalonFXControlMode.PercentOutput, y);
-      right2.set(TalonFXControlMode.PercentOutput, y);
+      left1.set(TalonFXControlMode.PercentOutput, -y/3);
+      left2.set(TalonFXControlMode.PercentOutput, -y/3);
+      right1.set(TalonFXControlMode.PercentOutput, y/3);
+      right2.set(TalonFXControlMode.PercentOutput, y/3);
+    }
+
+    public void turns (double x, double y){
+      if (y>=0) {
+        right1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)-(-y/Constants.Motor.sensitivity));
+        left1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)+(-y/Constants.Motor.sensitivity));
+      }
+      else {
+        right1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity)));
+        left1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity)));
+      }
+    }
+    public void shiftHigh(){
+      shifter.set(false);
+    }
+    public void shiftLow(){
+      shifter.set(true);
+    }
+    public boolean isLowGear(){
+      return shifter.get();
     }
 
     public void turnRight(double x) {

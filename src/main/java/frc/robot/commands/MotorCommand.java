@@ -31,7 +31,8 @@ public class MotorCommand extends CommandBase {
   @Override
   
   public void execute() {
-    testMotor.setDrive(-(happyStick.getY()));
+    testMotor.turns(happyStick.getX(), (happyStick.getY()));
+    testMotor.shiftLow();
     //testMotor.turnRight(happyStick.getX());
     //testMotor.turnLeft(happyStick.getX());
   }
@@ -40,6 +41,7 @@ public class MotorCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     testMotor.setDrive(0);
+    testMotor.shiftHigh();
   }
 
   // Returns true when the command should end.

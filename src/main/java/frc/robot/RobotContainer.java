@@ -31,8 +31,6 @@ public class RobotContainer {
 
   private final Joystick happyStick = new Joystick(Constants.RobotContainer.Ajoystick);
 
-  private final JoystickButton testHappiness = new JoystickButton(happyStick, Constants.RobotContainer.MOTOR_BUTTON);
-
   private final JoystickButton brake = new JoystickButton(happyStick, Constants.RobotContainer.BRAKE_BUTTON);
 
   private final MotorSubsystem runMotor = new MotorSubsystem();
@@ -53,7 +51,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    testHappiness.whileHeld(new BrakeCommand(runMotor, happyStick));
+  
     brake.whileHeld(new BrakeCommand(runMotor, happyStick));
   }
 
