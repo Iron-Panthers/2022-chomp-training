@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
+import com.ctre.phoenix.Orchestra;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,6 +22,7 @@ public class MotorSubsystem extends SubsystemBase {
   private final TalonFX right2 = new TalonFX(Constants.Motor.kRight2Id);
   private final Solenoid shifter = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Motor.pcmID);
 
+  private final orchestra chompOrchestra = new orchestra
 
 
   
@@ -59,6 +60,10 @@ public class MotorSubsystem extends SubsystemBase {
     }
     public boolean isLowGear(){
       return shifter.get();
+    }
+
+    public void playMusic() {
+
     }
 
     public void turnRight(double x) {

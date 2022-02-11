@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MotorCommand;
+import frc.robot.commands.MusicCommand;
 import frc.robot.commands.BrakeCommand;
 
 
@@ -32,7 +33,7 @@ public class RobotContainer {
   private final Joystick happyStick = new Joystick(Constants.RobotContainer.Ajoystick);
 
   private final JoystickButton brake = new JoystickButton(happyStick, Constants.RobotContainer.BRAKE_BUTTON);
-
+  private final JoystickButton playMusicButton = new JoystickButton(happyStick, Constants.RobotContainer.PLAY_MUSIC_BUTTON);
   private final MotorSubsystem runMotor = new MotorSubsystem();
 
 
@@ -52,7 +53,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
   
-    brake.whileHeld(new BrakeCommand(runMotor, happyStick));
+    brake.whileHeld(new BrakeCommand(runMotor));
+    playMusicButton.whileHeld(new MusicCommand(runMotor));
   }
 
   /**
