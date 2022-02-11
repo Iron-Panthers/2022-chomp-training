@@ -7,14 +7,17 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.MotorSubsystem;
+import frc.robot.subsystems.MusicSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MotorCommand;
 import frc.robot.commands.MusicCommand;
 import frc.robot.commands.BrakeCommand;
+import frc.robot.commands.ArmCommand;
 
 
 /**
@@ -34,7 +37,11 @@ public class RobotContainer {
 
   private final JoystickButton brake = new JoystickButton(happyStick, Constants.RobotContainer.BRAKE_BUTTON);
   private final JoystickButton playMusicButton = new JoystickButton(happyStick, Constants.RobotContainer.PLAY_MUSIC_BUTTON);
+  private final JoystickButton moveArmUpButton = new JoystickButton(happyStick, Constants.Arm.MOVE_ARM_UP_BUTTON);
+  private final JoystickButton moveArmDownButton = new JoystickButton(happyStick, Constants.Arm.MOVE_ARM_DOWN_BUTTON);
   private final MotorSubsystem runMotor = new MotorSubsystem();
+  private final MusicSubsystem Music = new MusicSubsystem();
+  private final ArmSubsystem Arm = new ArmSubsystem();
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -42,6 +49,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick));
+    Arm.setDefaultCommand(new ArmCommand(Arm, 0));
   }
 
   /**
@@ -54,7 +62,11 @@ public class RobotContainer {
 
   
     brake.whileHeld(new BrakeCommand(runMotor));
-    playMusicButton.whileHeld(new MusicCommand(runMotor));
+    playMusicButton.whileHeld(new MusicCommand(Music));
+    moveArmUpButton.whileHeld(new ArmCommand(Arm, Constants.Arm.ArmMoveSpeed));
+    moveArmDownButton.whileHeld(new ArmCommand(Arm, -Constants.Arm.ArmMoveSpeed));
+
+
   }
 
   /**

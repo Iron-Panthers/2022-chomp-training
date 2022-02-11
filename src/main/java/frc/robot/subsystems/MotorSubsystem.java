@@ -6,7 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.Orchestra;
+import com.ctre.phoenix.music.Orchestra;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -22,8 +22,7 @@ public class MotorSubsystem extends SubsystemBase {
   private final TalonFX right2 = new TalonFX(Constants.Motor.kRight2Id);
   private final Solenoid shifter = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Motor.pcmID);
 
-  private final orchestra chompOrchestra = new orchestra
-
+  
 
   
   /** Creates a new Motor. */
@@ -33,6 +32,20 @@ public class MotorSubsystem extends SubsystemBase {
     left2.follow(left1);
     right2.follow(right1);
     shiftLow();
+
+    
+
+  }
+
+  public void turns (double x, double y){
+    if (y>=0`) {
+      right1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity));
+      left1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity));
+    }
+    else {
+      right1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity)));
+      left1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity)));
+    }
   }
 
     public void setDrive(double y) {
@@ -42,16 +55,7 @@ public class MotorSubsystem extends SubsystemBase {
       right2.set(TalonFXControlMode.PercentOutput, y/3);
     }
 
-    public void turns (double x, double y){
-      if (y>=0) {
-        right1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)-(-y/Constants.Motor.sensitivity));
-        left1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)+(-y/Constants.Motor.sensitivity));
-      }
-      else {
-        right1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity)));
-        left1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity)));
-      }
-    }
+    
     public void shiftHigh(){
       shifter.set(false);
     }
@@ -62,24 +66,7 @@ public class MotorSubsystem extends SubsystemBase {
       return shifter.get();
     }
 
-    public void playMusic() {
-
-    }
-
-    public void turnRight(double x) {
-      right1.set(TalonFXControlMode.PercentOutput, -x);
-      right2.set(TalonFXControlMode.PercentOutput, -x);
-      left1.set(TalonFXControlMode.PercentOutput, x);
-      left2.set(TalonFXControlMode.PercentOutput, x);
-    }
-
-    public void turnLeft(double x) {
-      right1.set(TalonFXControlMode.PercentOutput, x);
-      right2.set(TalonFXControlMode.PercentOutput, x);
-      left1.set(TalonFXControlMode.PercentOutput, -x);
-      left2.set(TalonFXControlMode.PercentOutput, -x);
-    }
-
+    
 
   public void setPower(TalonFX motor, double power) {
 

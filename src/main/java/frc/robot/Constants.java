@@ -31,11 +31,49 @@ public final class Constants {
 
     }
 
+
+    public static class Arm {
+
+        public static final int kLeftId = 9;
+        public static final int kRightId = 10;
+        public static final int kCANCoderId = 0;
+
+        public static final int MOVE_ARM_UP_BUTTON = 3;
+        public static final int MOVE_ARM_DOWN_BUTTON = 2;
+       
+        public static final double ArmMoveSpeed = 0.2;
+        
+
+
+    }
+
+    public static class Music {
+
+        public static final String fileName = "MegalovaniaForChomp.chrp";
+        //5 is the loose one
+        public static final int kMusic1Id = 5;
+        public static final int kMusic2Id = 4;
+        
+        public static final int kMusic3Id = 4;//change in future
+        public static final int kMusic4Id = 7;
+        public static final int kMusic5Id = 10;
+    }
+
+    public static class Climb{
+
+        public static final int kClimbLeft = 11;
+        public static final int kClimbRight = 12;
+    
+    }
+
+    
+
     public static class RobotContainer {
 
         public static final int Ajoystick = 0;
         public static final int MOTOR_BUTTON = 3;
         public static final int BRAKE_BUTTON = 1;
+        public static final int PLAY_MUSIC_BUTTON = 6;
         
     }
 

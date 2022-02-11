@@ -6,18 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import frc.robot.subsystems.MotorSubsystem;
+import frc.robot.subsystems.MusicSubsystem;
 
-import edu.wpi.first.wpilibj.Joystick;
 
 /** An example command that uses an example subsystem. */
-public class BrakeCommand extends CommandBase {
+public class MusicCommand extends CommandBase {
    
-  private MotorSubsystem testMotor;
 
-  public BrakeCommand(MotorSubsystem testMotor, Joystick happyStick) {
+  private MusicSubsystem Music;
+
+
+  public MusicCommand(MusicSubsystem Music) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(testMotor);
+   this.Music = Music;
+    addRequirements(Music);
+    
   }
 
   // Called when the command is initially scheduled.
@@ -27,13 +30,13 @@ public class BrakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    testMotor.setDrive(0);
+      Music.playMusic();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    testMotor.setDrive(0);
+    Music.pauseMusic();
   }
 
   // Returns true when the command should end.

@@ -15,7 +15,7 @@ public class BrakeCommand extends CommandBase {
    
   private MotorSubsystem testMotor;
 
-  public BrakeCommand(MotorSubsystem testMotor, Joystick happyStick) {
+  public BrakeCommand(MotorSubsystem testMotor) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(testMotor);
   }
