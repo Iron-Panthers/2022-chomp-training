@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.music.Orchestra;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants;
 
 
@@ -22,9 +25,19 @@ public class MotorSubsystem extends SubsystemBase {
   private final TalonFX right2 = new TalonFX(Constants.Motor.kRight2Id);
   private final Solenoid shifter = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Motor.pcmID);
 
-  
+ 
+  MotorController controlLeft1 = new WPI_TalonFX(Constants.Motor.kLeft1Id);
+  MotorController controlLeft2 = new WPI_TalonFX(Constants.Motor.kLeft2Id);
 
+  MotorController controlRight1 = new WPI_TalonFX(Constants.Motor.kRight1Id);
+  MotorController controlRight2 = new WPI_TalonFX(Constants.Motor.kRight2Id);
+
+  MotorControllerGroup controllerRight = new MotorControllerGroup(controlRight1, controlRight2);
+
+  MotorControllerGroup controllerLeft = new MotorControllerGroup(controlLeft1, controlLeft2);
   
+  DifferentialDrive chompArcadeDrive = new DifferentialDrive(controllerLeft, controllerRight);
+
   /** Creates a new Motor. */
   public MotorSubsystem() {
 
@@ -32,13 +45,12 @@ public class MotorSubsystem extends SubsystemBase {
     left2.follow(left1);
     right2.follow(right1);
     shiftLow();
-
     
 
   }
 
   public void turns (double x, double y){
-    if (y>=0`) {
+    if (y>=0) {
       right1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity));
       left1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity));
     }
@@ -47,6 +59,11 @@ public class MotorSubsystem extends SubsystemBase {
       left1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity)));
     }
   }
+
+  public void arcadeDrive(double moveSpeed, double rotateSpeed) {
+    chompArcadeDrive.arcadeDrive(moveSpeed, rotateSpeed);
+  }
+
 
     public void setDrive(double y) {
       left1.set(TalonFXControlMode.PercentOutput, -y/3);
@@ -73,6 +90,13 @@ public class MotorSubsystem extends SubsystemBase {
     motor.set(TalonFXControlMode.PercentOutput, power);
   
   }
+
+
+
+
+
+
+
 
   public void printText() {
 

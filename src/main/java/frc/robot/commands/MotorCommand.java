@@ -8,20 +8,40 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import frc.robot.subsystems.MotorSubsystem;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /** An example command that uses an example subsystem. */
 public class MotorCommand extends CommandBase {
    
   private MotorSubsystem testMotor;
-  private Joystick happyStick;
+  /*
+  private DoubleSupplier getX;
+  private DoubleSupplier getY;
+*/
 
-  public MotorCommand(MotorSubsystem testMotor, Joystick happyStick) {
+
+private Double getX;
+private Double getY;
+
+ /*
+  public MotorCommand(MotorSubsystem testMotor, DoubleSupplier getX, DoubleSupplier getY) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.testMotor = testMotor;
-    this.happyStick = happyStick;
+    this.getX = getX;
+    this.getY = getY;
     addRequirements(testMotor);
   }
+*/
+
+public MotorCommand(MotorSubsystem testMotor, double getX, double getY) {
+  // Use addRequirements() here to declare subsystem dependencies.
+  this.testMotor = testMotor;
+  this.getX = getX;
+  this.getY = getY;
+  addRequirements(testMotor);
+}
 
   // Called when the command is initially scheduled.
   @Override/*  */
@@ -31,7 +51,8 @@ public class MotorCommand extends CommandBase {
   @Override
   
   public void execute() {
-    testMotor.turns(happyStick.getX(), (happyStick.getY()));
+    //testMotor.turns(getX.getAsDouble(), getY.getAsDouble());
+    testMotor.turns(getX, getY);
     testMotor.shiftLow();
     //testMotor.turnRight(happyStick.getX());
     //testMotor.turnLeft(happyStick.getX());

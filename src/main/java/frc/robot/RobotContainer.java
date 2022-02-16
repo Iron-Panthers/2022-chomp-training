@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MotorCommand;
 import frc.robot.commands.MusicCommand;
 import frc.robot.commands.BrakeCommand;
+import frc.robot.commands.ArcadeCommand;
 import frc.robot.commands.ArmCommand;
 
 
@@ -48,9 +49,12 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick));
+    runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick.getX(), happyStick.getY()));
+    //runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick::getY, happyStick::getY));
+    //runMotor.setDefaultCommand(new ArcadeCommand(runMotor, happyStick.getY(), happyStick.getX()));
     Arm.setDefaultCommand(new ArmCommand(Arm, 0));
   }
+  
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by

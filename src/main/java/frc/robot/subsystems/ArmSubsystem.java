@@ -7,9 +7,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import frc.robot.Constants;
@@ -21,12 +18,7 @@ public class ArmSubsystem extends SubsystemBase {
   private final CANCoder canCoder = new CANCoder(Constants.Arm.kCANCoderId);
   
   /** Creates a new ArmSubsystem. */
-  public ArmSubsystem() {
-   
-  
-    
-
-
+  public ArmSubsystem() { 
   }
 
  
