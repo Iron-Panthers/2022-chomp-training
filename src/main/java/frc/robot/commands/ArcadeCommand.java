@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.subsystems.MotorSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
@@ -17,16 +19,15 @@ public class ArcadeCommand extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
 
-  private double moveSpeed;
-  private double rotateSpeed;
+   
+  private Joystick happyStick;
   private MotorSubsystem actualmotorsubsystem;
 
-  public ArcadeCommand (MotorSubsystem motorsubsystem, double moveSpeed, double rotateSpeed) {
+  public ArcadeCommand (MotorSubsystem motorsubsystem, Joystick happyStick) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(motorsubsystem);
-    actualmotorsubsystem = motorsubsystem;
-    this.moveSpeed = moveSpeed;
-    this.rotateSpeed = rotateSpeed;
+    this.actualmotorsubsystem = motorsubsystem; 
+    this.happyStick = happyStick;
   }
 
   // Called when the command is initially scheduled.
@@ -38,7 +39,8 @@ public class ArcadeCommand extends CommandBase {
   public void execute(
   ) {
 
-    actualmotorsubsystem.arcadeDrive(moveSpeed,rotateSpeed);
+ actualmotorsubsystem.arcadeDrive(-happyStick.getX()/Constants.Motor.sensitivity,happyStick.getY()/Constants.Motor.sensitivity);
+     //actualmotorsubsystem.arcadeDrive(happyStick.getY()/Constants.Motor.sensitivity,happyStick.getX()/Constants.Motor.sensitivity);
   }
 
   // Called once the command ends or is interrupted.

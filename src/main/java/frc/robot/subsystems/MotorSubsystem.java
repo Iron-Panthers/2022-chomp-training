@@ -23,6 +23,8 @@ public class MotorSubsystem extends SubsystemBase {
   private final TalonFX left2 = new TalonFX(Constants.Motor.kLeft2Id);
   private final TalonFX right1 = new TalonFX(Constants.Motor.kRight1Id);
   private final TalonFX right2 = new TalonFX(Constants.Motor.kRight2Id);
+  
+  
   private final Solenoid shifter = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.Motor.pcmID);
 
  
@@ -50,11 +52,13 @@ public class MotorSubsystem extends SubsystemBase {
   }
 
   public void turns (double x, double y){
-    if (y>=0) {
-      right1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity));
-      left1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity));
-    }
-    else {
+    if (y>=0.1) {
+      right1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity));//-0.9/5
+      left1.set(TalonFXControlMode.PercentOutput, (x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity));//-1.1/5
+    } else if(y < 0.1 && y > -0.1){
+      right1.set(TalonFXControlMode.PercentOutput, x/Constants.Motor.sensitivity);
+      left1.set(TalonFXControlMode.PercentOutput, x/Constants.Motor.sensitivity);
+    }else {
       right1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)-(y/Constants.Motor.sensitivity)));
       left1.set(TalonFXControlMode.PercentOutput, -((x/Constants.Motor.sensitivity)+(y/Constants.Motor.sensitivity)));
     }

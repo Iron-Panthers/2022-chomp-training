@@ -21,6 +21,7 @@ import frc.robot.commands.ArcadeCommand;
 import frc.robot.commands.ArmCommand;
 
 
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -49,9 +50,9 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick.getX(), happyStick.getY()));
+    //runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick));
     //runMotor.setDefaultCommand(new MotorCommand(runMotor, happyStick::getY, happyStick::getY));
-    //runMotor.setDefaultCommand(new ArcadeCommand(runMotor, happyStick.getY(), happyStick.getX()));
+    runMotor.setDefaultCommand(new ArcadeCommand(runMotor, happyStick));
     Arm.setDefaultCommand(new ArmCommand(Arm, 0));
   }
   

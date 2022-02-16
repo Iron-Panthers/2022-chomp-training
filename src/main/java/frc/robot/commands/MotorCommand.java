@@ -24,7 +24,7 @@ public class MotorCommand extends CommandBase {
 
 private Double getX;
 private Double getY;
-
+private Joystick happyStick;
  /*
   public MotorCommand(MotorSubsystem testMotor, DoubleSupplier getX, DoubleSupplier getY) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -34,7 +34,7 @@ private Double getY;
     addRequirements(testMotor);
   }
 */
-
+/*
 public MotorCommand(MotorSubsystem testMotor, double getX, double getY) {
   // Use addRequirements() here to declare subsystem dependencies.
   this.testMotor = testMotor;
@@ -42,6 +42,16 @@ public MotorCommand(MotorSubsystem testMotor, double getX, double getY) {
   this.getY = getY;
   addRequirements(testMotor);
 }
+
+*/
+
+  public MotorCommand(MotorSubsystem testMotor, Joystick happyStick) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.testMotor = testMotor;
+    this.happyStick = happyStick;
+    addRequirements(testMotor);
+  }
+
 
   // Called when the command is initially scheduled.
   @Override/*  */
@@ -52,7 +62,8 @@ public MotorCommand(MotorSubsystem testMotor, double getX, double getY) {
   
   public void execute() {
     //testMotor.turns(getX.getAsDouble(), getY.getAsDouble());
-    testMotor.turns(getX, getY);
+    //testMotor.turns(getX, getY);
+    testMotor.turns(happyStick.getX(), -(happyStick.getY()));
     testMotor.shiftLow();
     //testMotor.turnRight(happyStick.getX());
     //testMotor.turnLeft(happyStick.getX());
